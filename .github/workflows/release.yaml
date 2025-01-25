@@ -1,0 +1,40 @@
+name: Auto Release
+
+on:
+  push:
+    paths:
+      - "pyproject.toml"
+
+jobs:
+  detect-version:
+    name: Detect Version Change
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Grant write permissions to create releases
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: pip install toml
+
+    - name: Detect Version
+      id: version
+      run: python scripts/detect_version.py
+
+    - name: Create GitHub Release
+      if: steps.version.outputs.needs_release == 'true'
+      uses: ncipollo/release-action@v1
+      with:
+        tag: v${{ steps.version.outputs.version }}
+        releaseName: v${{ steps.version.outputs.version }}
+        body: |
+          ## Changes in v${{ steps.version.outputs.version }}
+          Automatically generated release based on version update in `pyproject.toml`.
+        prerelease: false
