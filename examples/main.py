@@ -14,6 +14,8 @@ print("Anonymous User:", response)
 thread = client.threads.create(user_id=response['user_id'])
 print("Thread Created:", thread)
 
+
+
 # Add a message to the thread
-message = client.messages.create(user_id=response['user_id']thread_id=thread["thread_id"], sender_id="uuid-of-user", content="Hello, world!")
+message = client.messages.create(user_id=response['user_id'],thread_id=thread["thread_id"], sender_id="uuid-of-user", content="Hello, world!")
 print("Message Sent:", message)

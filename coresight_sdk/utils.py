@@ -25,8 +25,8 @@ class APIRequestHandler:
             )
         return response.json()
 
-    def get(self, endpoint: str) -> dict:
-        response = requests.get(f"{self.base_url}{endpoint}", headers=self._get_headers())
+    def get(self, endpoint: str,params: dict = None) -> dict:
+        response = requests.get(f"{self.base_url}{endpoint}",params=params, headers=self._get_headers())
         return self._handle_response(response)
 
     def post(self, endpoint: str, payload: dict) -> dict:

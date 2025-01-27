@@ -4,17 +4,16 @@ from coresight_sdk.messages import Messages
 from coresight_sdk.feedback import Feedback
 from coresight_sdk.utils import APIRequestHandler
 
-BASE_API_URL = "https://10j5fuhfua.execute-api.eu-west-3.amazonaws.com/Prod/"
-
 class ProjectClient:
-    def __init__(self, api_key: str) -> None:
+    def __init__(self, api_key: str,base_api_url :str = "http://127.0.0.1:3000/") -> None:
         """
         Initialize the SDK for a specific project.
 
         :param api_key: API key associated with the project.
         """
         self.api_key = api_key
-        self.request_handler = APIRequestHandler(BASE_API_URL, self.api_key)
+        self.base_api_url = base_api_url
+        self.request_handler = APIRequestHandler(self.base_api_url, self.api_key)
         self.project_id = self.get_from_key()['project_id']
         # Initialize project-scoped modules
         self.users = Users(self.request_handler,self.project_id)
