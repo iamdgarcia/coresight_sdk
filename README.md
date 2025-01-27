@@ -1,4 +1,3 @@
-```markdown
 # Coresight Python SDK
 
 This Python SDK (`coresight_sdk`) provides a convenient interface to the **Multi-Tenant Messaging API** as defined by the provided `openapi.yaml`. It supports:
