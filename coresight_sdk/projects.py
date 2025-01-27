@@ -15,6 +15,13 @@ class Projects:
         """
         return self.request_handler.get(f"/projects/{project_id}")
 
+    
+    def get_from_key(self, api_key: str) -> dict:
+        """
+        Retrieve details of a specific project.
+        """
+        return self.request_handler.get(f"/projects/from_api_key")
+
     def list(self) -> list:
         """
         List all projects for the client.

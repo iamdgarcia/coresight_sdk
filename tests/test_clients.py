@@ -1,14 +1,12 @@
 import pytest
-from coresight_sdk.client import CoresightClient
+from coresight_sdk.client import ProjectClient
 from coresight_sdk.utils import APIRequestHandler
-from coresight_sdk.exceptions import ApiException
 
 @pytest.fixture
 def client():
-    return CoresightClient(base_url="https://api.example.com", api_key="test-api-key")
+    return ProjectClient(api_key="test-api-key")
 
 def test_client_initialization(client):
-    assert client.base_url == "https://api.example.com"
     assert client.api_key == "test-api-key"
 
 def test_request_handler_headers(client):

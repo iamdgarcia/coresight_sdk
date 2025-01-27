@@ -1,16 +1,17 @@
 class Messages:
-    def __init__(self, request_handler):
+    def __init__(self, request_handler,project_id):
         self.request_handler = request_handler
+        self.project_id = project_id
 
-    def create(self, project_id: str, thread_id: str, sender_id: str, content: str) -> dict:
+    def create(self, user_id: str, thread_id: str, sender_id: str, content: str) -> dict:
         """
         Create a new message in a thread.
         """
-        payload = {"sender_id": sender_id, "content": content}
-        return self.request_handler.post(f"/projects/{project_id}/threads/{thread_id}/messages", payload)
+        payload = {"sender": sender_id, "content": content}
+        return self.request_handler.post(f"projects/{self.project_id}/users/{user_id}/threads/{thread_id}/messages", payload)
 
-    def list(self, project_id: str, thread_id: str) -> list:
+    def list(self,user_id:str, thread_id: str) -> list:
         """
         Retrieve all messages in a thread.
         """
-        return self.request_handler.get(f"/projects/{project_id}/threads/{thread_id}/messages")
+        return self.request_handler.get(f"projects/{self.project_id}/users/{user_id}/threads/{thread_id}/messages")

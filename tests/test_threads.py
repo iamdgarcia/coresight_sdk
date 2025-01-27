@@ -13,8 +13,22 @@ def test_create_thread(threads, mock_request_handler):
     mock_response = {"thread_id": "uuid-thread", "user_id": "uuid-user"}
     mock_request_handler.post.return_value = mock_response
 
-    response = threads.create(project_id="uuid-project", user_id="uuid-user")
+    response = threads.create(user_id="uuid-user")
     assert response == mock_response
-    mock_request_handler.post.assert_called_once_with(
-        "/projects/uuid-project/threads", {"user_id": "uuid-user"}
-    )
+    mock_request_handler.post.assert_called_once_with("/threads", {"user_id": "uuid-user"})
+
+def test_get_thread(threads, mock_request_handler):
+    mock_response = {"thread_id": "uuid-thread", "user_id": "uuid-user"}
+    mock_request_handler.get.return_value = mock_response
+
+    response = threads.get(thread_id="uuid-thread")
+    assert response == mock_response
+    mock_request_handler.get.assert_called_once_with("/threads/uuid-thread")
+
+def test_list_threads(threads, mock_request_handler):
+    mock_response = [{"thread_id": "uuid-thread", "user_id": "uuid-user"}]
+    mock_request_handler.get.return_value = mock_response
+
+    response = threads.list()
+    assert response == mock_response
+    mock_request_handler.get.assert_called_once_with("/threads")

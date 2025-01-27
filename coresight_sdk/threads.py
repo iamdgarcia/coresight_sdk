@@ -1,22 +1,23 @@
 class Threads:
-    def __init__(self, request_handler):
+    def __init__(self, request_handler,project_id):
         self.request_handler = request_handler
+        self.project_id = project_id
 
-    def create(self, project_id: str, user_id: str) -> dict:
+    def create(self, user_id: str) -> dict:
         """
-        Create a new thread in a project.
+        Create a new thread in the project.
         """
-        payload = {"user_id": user_id}
-        return self.request_handler.post(f"/projects/{project_id}/threads", payload)
+        print(user_id)
+        return self.request_handler.post(f"projects/{self.project_id}/users/{user_id}/threads",payload={"user_id":user_id})
 
-    def get(self, project_id: str, thread_id: str) -> dict:
+    def get(self, thread_id: str,user_id: str) -> dict:
         """
-        Retrieve details of a specific thread.
+        Retrieve a specific thread.
         """
-        return self.request_handler.get(f"/projects/{project_id}/threads/{thread_id}")
+        return self.request_handler.get(f"projects/{self.project_id}/users/{user_id}/threads/{thread_id}")
 
-    def list(self, project_id: str) -> list:
+    def list(self,user_id: str) -> list:
         """
-        List all threads in a project.
+        List all threads in the project.
         """
-        return self.request_handler.get(f"/projects/{project_id}/threads")
+        return self.request_handler.get(f"projects/{self.project_id}/users/{user_id}/threads")

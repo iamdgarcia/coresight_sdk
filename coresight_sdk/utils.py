@@ -1,7 +1,6 @@
 import requests
 from coresight_sdk.exceptions import ApiException
 
-
 class APIRequestHandler:
     def __init__(self, base_url: str, api_key: str):
         self.base_url = base_url
@@ -27,21 +26,17 @@ class APIRequestHandler:
         return response.json()
 
     def get(self, endpoint: str) -> dict:
-        url = f"{self.base_url}{endpoint}"
-        response = requests.get(url, headers=self._get_headers())
+        response = requests.get(f"{self.base_url}{endpoint}", headers=self._get_headers())
         return self._handle_response(response)
 
     def post(self, endpoint: str, payload: dict) -> dict:
-        url = f"{self.base_url}{endpoint}"
-        response = requests.post(url, json=payload, headers=self._get_headers())
+        response = requests.post(f"{self.base_url}{endpoint}", json=payload, headers=self._get_headers())
         return self._handle_response(response)
 
     def put(self, endpoint: str, payload: dict) -> dict:
-        url = f"{self.base_url}{endpoint}"
-        response = requests.put(url, json=payload, headers=self._get_headers())
+        response = requests.put(f"{self.base_url}{endpoint}", json=payload, headers=self._get_headers())
         return self._handle_response(response)
 
     def delete(self, endpoint: str) -> dict:
-        url = f"{self.base_url}{endpoint}"
-        response = requests.delete(url, headers=self._get_headers())
+        response = requests.delete(f"{self.base_url}{endpoint}", headers=self._get_headers())
         return self._handle_response(response)
