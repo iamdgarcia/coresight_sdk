@@ -15,7 +15,7 @@ packages = [
 python = "^3.11"
 requests = "^2.20"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^6.2"
 pytest-mock = "^0.10.2"
 
