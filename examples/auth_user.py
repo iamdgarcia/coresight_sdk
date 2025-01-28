@@ -1,7 +1,7 @@
 from coresight_sdk.client import ProjectClient
 
 # Initialize the SDK with a project-specific API key
-client = ProjectClient(api_key="your-key")
+client = ProjectClient(api_key="y3PJiz4pjXGGxnGq8e8p9nueefiysp15aoumkW95",base_api_url="https://ku7dfi9gaj.execute-api.eu-west-3.amazonaws.com/Prod/")
 
 # Get registered user
 current_user = client.users.get("test@gmail.com")[0]
@@ -11,12 +11,12 @@ current_user = client.users.get("test@gmail.com")[0]
 print("Auth User User:", current_user)
 
 # Create a thread
-# thread = client.threads.create(user_id=current_user['user_id'])
-# print("Thread Created:", thread)
+thread = client.threads.create(user_id=current_user['user_id'])
+print("Thread Created:", thread)
 
-# Create a thread
-threads = client.threads.list(user_id=current_user['user_id'])
-print("Active threads", threads)
+# # Create a thread
+# threads = client.threads.list(user_id=current_user['user_id'])
+# print("Active threads", threads)
 
 thread = threads[0]
 

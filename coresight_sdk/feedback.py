@@ -8,10 +8,10 @@ class Feedback:
         Add feedback for a message.
         """
         payload = {"user_id": user_id, "rating": rating, "comment": comment}
-        return self.request_handler.post(f"projects/{self.project_id}/threads/{thread_id}/messages/{message_id}/feedback", payload)
+        return self.request_handler.post(f"/projects/{self.project_id}/threads/{thread_id}/messages/{message_id}/feedback", payload)
 
     def list(self, message_id: str) -> list:
         """
         List all feedback for a message.
         """
-        return self.request_handler.get(f"projects/{self.project_id}/threads/{thread_id}/messages/{message_id}/feedback")
+        return self.request_handler.get(f"/projects/{self.project_id}/threads/{thread_id}/messages/{message_id}/feedback")
